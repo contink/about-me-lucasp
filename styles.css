@@ -1,0 +1,770 @@
+/* ── Tokens ── */
+:root {
+  --dry-sage: #c9cba3;
+  --soft-peach: #ffe1a8;
+  --vibrant-coral: #e26d5c;
+  --wine-plum: #723d46;
+  --mauve-shadow: #472d30;
+  --cream: #fffaf0;
+}
+
+/* ── Base ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, Arial, sans-serif;
+  font-weight: 400;
+  color: var(--mauve-shadow);
+  background: var(--cream);
+}
+
+/* ── Typography ── */
+h1 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+}
+h2 {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 600;
+  font-optical-sizing: auto;
+}
+h3 {
+  font-family: "Inter", ui-sans-serif, system-ui, Arial, sans-serif;
+  font-weight: 600;
+}
+
+/* ── Scroll animations (mirrors ui-layouts ScrollElement) ── */
+[data-scroll] {
+  opacity: 0;
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out,
+    filter 0.5s ease-out;
+  will-change: transform, opacity, filter;
+}
+[data-scroll].is-visible {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+[data-scroll]:not([data-scroll-direction]),
+[data-scroll][data-scroll-direction="down"] {
+  transform: translateY(60px);
+  filter: blur(8px);
+}
+[data-scroll][data-scroll-direction="up"] {
+  transform: translateY(-60px);
+  filter: blur(8px);
+}
+[data-scroll][data-scroll-direction="left"] {
+  transform: translateX(-80px);
+  filter: blur(8px);
+}
+[data-scroll][data-scroll-direction="right"] {
+  transform: translateX(80px);
+  filter: blur(8px);
+}
+
+/* ─────────────────────────────────────────
+   SITE HEADER
+───────────────────────────────────────── */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+/* becomes solid after hero scrolled past */
+.site-header.scrolled {
+  background: rgba(255, 250, 240, 0.85);
+  backdrop-filter: blur(12px);
+  border-color: rgba(0, 0, 0, 0.06);
+}
+.site-header .inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .logo {
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: -0.01em;
+  color: var(--wine-plum);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.site-header.scrolled .logo {
+  opacity: 1;
+}
+.site-header nav a {
+  font-size: 0.8125rem;
+  color: var(--mauve-shadow);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site-header nav a:hover {
+  color: var(--wine-plum);
+}
+.site-header .reach-out {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  background: var(--wine-plum);
+  color: var(--soft-peach);
+  padding: 8px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+  opacity: 0;
+  pointer-events: none;
+}
+.site-header.scrolled .reach-out {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Anchor offsets for fixed header */
+#lets-connect {
+  scroll-margin-top: 96px;
+}
+
+.hero-cover {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  background: var(--soft-peach);
+  /* needed to scope mix-blend-mode to this container only */
+  isolation: isolate;
+}
+
+/* ── Layer 1: faint DESIGN word behind photo ── */
+.hero__word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -52%;
+  white-space: nowrap;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-size: clamp(96px, 17vw, 220px);
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+.hero__word--back {
+  z-index: 1;
+  color: var(--vibrant-coral);
+  opacity: 1;
+}
+/* Layer 3: screen blend — invisible on peach cream, visible on dark photo pixels */
+.hero__word--front {
+  z-index: 3;
+  color: var(--vibrant-coral);
+  opacity: 1;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px var(--vibrant-coral);
+}
+
+/* ── Layer 2: portrait ── */
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
+  display: block;
+  transform: translateX(-5%) scale(1.15);
+  transform-origin: bottom center;
+}
+
+/* ── Layer 4: big name ── */
+.hero__name {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 4;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: clamp(12px, 2vw, 22px) clamp(16px, 2.5vw, 32px) 0;
+  line-height: 0.82;
+  pointer-events: none;
+  user-select: none;
+}
+.hero__name-word {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-size: clamp(72px, 13vw, 172px);
+  color: var(--wine-plum);
+  letter-spacing: -0.025em;
+  text-transform: uppercase;
+}
+.hero__name-word--right {
+  text-align: right;
+}
+
+/* ── Layer 5: scattered labels ── */
+.hero__label {
+  position: absolute;
+  z-index: 5;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: clamp(8px, 0.8vw, 11px);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--wine-plum);
+  line-height: 1.65;
+  pointer-events: none;
+  user-select: none;
+}
+/* Discipline — left side, upper-mid */
+.hero__label--discipline {
+  left: clamp(16px, 2.5vw, 32px);
+  top: 42%;
+}
+/* UX & Visual Systems — left side, below discipline, clear of hair */
+.hero__label--ux {
+  left: clamp(16px, 2.5vw, 32px);
+  top: 54%;
+  color: var(--mauve-shadow);
+  opacity: 0.75;
+}
+.hero__label--ux::before {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: currentColor;
+  margin-bottom: 5px;
+}
+/* Nebraska meta — bottom left */
+.hero__label--meta {
+  left: clamp(16px, 2.5vw, 32px);
+  bottom: clamp(56px, 9vh, 110px);
+}
+/* Nav — top right */
+.hero__label--nav {
+  right: clamp(16px, 2.5vw, 32px);
+  top: 34%;
+  text-align: right;
+}
+
+/* Ghost initials behind meta */
+.hero__ghost-initials {
+  position: absolute;
+  z-index: 4;
+  left: clamp(10px, 1.5vw, 20px);
+  bottom: 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-size: clamp(40px, 6vw, 80px);
+  letter-spacing: -0.03em;
+  color: var(--wine-plum);
+  opacity: 0.12;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ── Layer 6: DESIGN WITH PURPOSE ── */
+.hero__caption {
+  position: absolute;
+  z-index: 6;
+  right: clamp(14px, 2vw, 28px);
+  bottom: 10px;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-size: clamp(26px, 4vw, 58px);
+  line-height: 0.88;
+  letter-spacing: -0.025em;
+  color: var(--vibrant-coral);
+  text-transform: uppercase;
+  text-align: right;
+  max-width: 30%;
+  pointer-events: none;
+}
+
+/* ── Layer 7: scroll cue ── */
+.hero__scroll {
+  position: absolute;
+  z-index: 7;
+  bottom: 20px;
+  left: 50%;
+  translate: -50% 0;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 1;
+  animation: scrollBounce 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes scrollBounce {
+  0%,
+  100% {
+    translate: -50% 0;
+  }
+  50% {
+    translate: -50% 5px;
+  }
+}
+
+/* ─────────────────────────────────────────
+   HERO — TABLET  768–1024
+───────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .hero__photo img {
+    transform: translateX(-12%) scale(1.05);
+  }
+
+  .hero__word {
+    font-size: clamp(80px, 14vw, 170px);
+  }
+
+  .hero__name-word {
+    font-size: clamp(60px, 10vw, 120px);
+  }
+
+  .hero__label--discipline {
+    top: 38%;
+    font-size: clamp(7px, 1vw, 10px);
+  }
+
+  .hero__label--ux {
+    top: 48%;
+    font-size: clamp(7px, 1vw, 10px);
+  }
+
+  .hero__label--nav {
+    top: 30%;
+    font-size: clamp(7px, 1vw, 10px);
+  }
+
+  .hero__caption {
+    font-size: clamp(22px, 4.5vw, 44px);
+    max-width: 34%;
+    bottom: clamp(50px, 8vh, 100px);
+  }
+
+  .hero__label--meta {
+    bottom: clamp(44px, 7vh, 90px);
+  }
+
+  .hero__ghost-initials {
+    font-size: clamp(36px, 5vw, 60px);
+  }
+}
+
+/* ─────────────────────────────────────────
+   HERO — MOBILE  ≤ 767
+───────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Hero: clamp height so it doesn't feel endlessly tall */
+  .hero-cover {
+    min-height: 100svh;
+    max-height: 100svh;
+  }
+
+  /* Photo: full-hero container so the figure fills the frame */
+  .hero__photo {
+    inset: 0;
+    height: 100%;
+  }
+  .hero__photo img {
+    object-fit: contain;
+    object-position: bottom center;
+    transform: translateX(8%) scale(1.35);
+    transform-origin: bottom center;
+  }
+
+  /* DESIGN word: sit behind the photo, vertically centered */
+  .hero__word {
+    font-size: clamp(58px, 18vw, 90px);
+    top: 48%;
+  }
+
+  /* Name: stacked + centered */
+  .hero__name {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0;
+    padding-top: clamp(14px, 4vw, 24px);
+  }
+  .hero__name-word {
+    font-size: clamp(46px, 13vw, 68px);
+    text-align: center;
+  }
+
+  /* Discipline label: below the name, clear of photo */
+  .hero__label--discipline {
+    top: auto;
+    bottom: 52%;
+    font-size: clamp(8px, 2.5vw, 10px);
+  }
+
+  /* UX label: just below discipline */
+  .hero__label--ux {
+    top: auto;
+    bottom: 46%;
+    font-size: clamp(8px, 2.5vw, 10px);
+  }
+
+  /* Nav: hide on mobile */
+  .hero__label--nav {
+    display: none;
+  }
+
+  /* Meta: anchor to bottom-left, above caption */
+  .hero__label--meta {
+    bottom: clamp(80px, 16vh, 120px);
+    top: auto;
+    left: clamp(16px, 4vw, 24px);
+    font-size: clamp(8px, 2.2vw, 10px);
+  }
+
+  /* Caption: bottom-left, compact */
+  .hero__caption {
+    right: auto;
+    left: clamp(16px, 4vw, 24px);
+    bottom: clamp(38px, 7vh, 64px);
+    text-align: left;
+    max-width: 50%;
+    font-size: clamp(22px, 7vw, 32px);
+  }
+
+  /* Ghost: smaller and tucked into corner */
+  .hero__ghost-initials {
+    font-size: clamp(28px, 9vw, 48px);
+    bottom: 6px;
+    left: clamp(8px, 2vw, 14px);
+    opacity: 0.08;
+  }
+
+  /* Section headings + subtitles: centered on mobile */
+  #about h2,
+  #about h2 + p,
+  #skills h2,
+  #skills h2 + p,
+  #work h2,
+  #work h2 + p,
+  #contact h2,
+  #contact h2 + p {
+    text-align: center;
+  }
+}
+
+/* ─────────────────────────────────────────
+   HERO — SMALL MOBILE  ≤ 430
+───────────────────────────────────────── */
+@media (max-width: 430px) {
+  .hero__name-word {
+    font-size: clamp(42px, 15vw, 58px);
+  }
+  .hero__word {
+    font-size: clamp(50px, 16vw, 78px);
+  }
+  .hero__caption {
+    font-size: clamp(20px, 7vw, 28px);
+    max-width: 60%;
+    bottom: clamp(36px, 6vh, 56px);
+  }
+  .hero__label--meta {
+    bottom: clamp(76px, 14vh, 100px);
+  }
+  .hero__label--discipline {
+    bottom: 54%;
+  }
+  .hero__label--ux {
+    bottom: 48%;
+  }
+  .hero__photo img {
+    transform: translateX(5%) scale(1.25);
+  }
+}
+
+/* ─────────────────────────────────────────
+   PAGE BACKGROUND (below hero)
+───────────────────────────────────────── */
+.page-body {
+  background:
+    radial-gradient(
+      1000px 600px at 15% 10%,
+      rgba(255, 225, 168, 0.45),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 600px at 80% 20%,
+      rgba(201, 203, 163, 0.35),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 700px at 50% 90%,
+      rgba(226, 109, 92, 0.12),
+      transparent 55%
+    ),
+    var(--cream);
+}
+
+/* ─────────────────────────────────────────
+   SECTION SHELLS
+───────────────────────────────────────── */
+.section-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Tighten below-hero section spacing */
+section:not(.hero-cover) {
+  padding-block-start: 48px !important;
+}
+
+/* ─────────────────────────────────────────
+   SNAPSHOTS — CAROUSEL
+───────────────────────────────────────── */
+.carousel {
+  --carousel-gap: 16px;
+  --carousel-radius: 1.5rem;
+  position: relative;
+}
+
+.carousel__viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  border-radius: var(--carousel-radius);
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbars */
+.carousel__viewport {
+  scrollbar-width: none;
+}
+.carousel__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: var(--carousel-gap);
+}
+
+.carousel__slide {
+  scroll-snap-align: start;
+  height: 300px;
+  border-radius: var(--carousel-radius);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.carousel__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  transform: scale(1);
+  transition: transform 220ms ease;
+  will-change: transform;
+}
+
+.carousel__slide:hover img,
+.carousel__slide:focus-visible img {
+  transform: scale(1.08);
+}
+
+.carousel__slide:focus-visible {
+  outline: 2px solid rgba(255, 225, 168, 0.85);
+  outline-offset: 3px;
+}
+
+@media (min-width: 768px) {
+  .carousel__track {
+    grid-auto-columns: calc((100% - var(--carousel-gap)) / 2);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel__track {
+    grid-auto-columns: calc((100% - (2 * var(--carousel-gap))) / 3);
+  }
+}
+
+.carousel__btn {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--mauve-shadow);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    background 0.15s ease;
+  z-index: 2;
+}
+
+.carousel__btn--prev {
+  left: 16px;
+}
+
+.carousel__btn--next {
+  right: 16px;
+}
+
+.carousel__btn:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.carousel__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  background: rgba(240, 240, 240, 0.85);
+  transform: none;
+}
+
+/* ─────────────────────────────────────────
+   CONTACT — BOTTOM-HALF NOISE OVERLAY
+───────────────────────────────────────── */
+#contact .contact-card {
+  position: relative;
+  overflow: hidden;
+}
+
+#contact .contact-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  background-repeat: repeat;
+  background-size: 160px 160px;
+  background-image: url("https://www.ui-layouts.com/noise.gif");
+  mix-blend-mode: overlay;
+  /* Fade out: strong at top → none at bottom */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+}
+
+/* ─────────────────────────────────────────
+   SNAPSHOTS — LIGHTBOX
+───────────────────────────────────────── */
+.lightbox[hidden] {
+  display: none;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+}
+
+.lightbox__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.lightbox__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, calc(100vw - 48px));
+  height: calc(100vh - 48px);
+  margin: 0;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 250, 240, 0.95);
+}
+
+.lightbox__dialog img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--mauve-shadow);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease,
+    background 0.15s ease;
+}
+
+.lightbox__close:hover {
+  transform: scale(1.06);
+  opacity: 1;
+}
+
+.is-lightbox-open {
+  overflow: hidden;
+}

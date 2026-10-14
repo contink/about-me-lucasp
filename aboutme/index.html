@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucas Pruss — About Me</title>
+
+    <!-- Google Fonts: Fraunces (display) + Inter (UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Tailwind CDN (lets 21st.dev components work easily) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind config in-page -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "ui-sans-serif", "system-ui", "Arial"],
+              fraunces: ["Fraunces", "Georgia", "serif"],
+              inter: ["Inter", "ui-sans-serif", "system-ui", "Arial"],
+            },
+            colors: {
+              "dry-sage": "#c9cba3",
+              "soft-peach": "#ffe1a8",
+              "vibrant-coral": "#e26d5c",
+              "wine-plum": "#723d46",
+              "mauve-shadow": "#472d30",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+
+  <body class="text-mauve-shadow antialiased">
+    <!-- Site header — transparent over hero, solid after scroll -->
+    <header class="site-header" id="site-header">
+      <div class="inner">
+        <a href="#top" class="logo">Lucas Pruss</a>
+        <nav class="hidden gap-6 md:flex">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#work">Snapshots</a>
+          <a href="#lets-connect">Contact</a>
+        </nav>
+        <a
+          href="mailto:lucas.pruss.creative@gmail.com"
+          class="reach-out"
+          aria-label="Email Lucas Pruss"
+          >Reach out</a
+        >
+      </div>
+    </header>
+
+    <main id="top" class="page-body">
+      <!-- HERO COVER: full-viewport -->
+      <section class="hero-cover" id="hero-cover">
+        <!-- Layer 1 — faint DESIGN behind photo -->
+        <div class="hero__word hero__word--back" aria-hidden="true">DESIGN</div>
+
+        <!-- Layer 2 — portrait (transparent PNG) -->
+        <div class="hero__photo">
+          <img src="images/FaceShot.png" alt="Lucas Pruss" />
+        </div>
+
+        <!-- Layer 3 — DESIGN screen-blend: invisible on cream, visible on dark photo pixels -->
+        <div class="hero__word hero__word--front" aria-hidden="true">
+          DESIGN
+        </div>
+
+        <!-- Layer 4 — big name -->
+        <div class="hero__name" aria-label="Lucas Pruss">
+          <span class="hero__name-word">Lucas</span>
+          <span class="hero__name-word hero__name-word--right">Pruss</span>
+        </div>
+
+        <!-- Layer 5 — scattered labels -->
+        <span
+          class="hero__label hero__label--discipline"
+          aria-label="Graphic Design, Software Development Minor"
+        >
+          Graphic Design<br />+ Software Dev Minor
+        </span>
+
+        <span
+          class="hero__label hero__label--ux"
+          aria-label="UX and Visual Systems"
+        >
+          UX &amp; Visual<br />Systems
+        </span>
+
+        <span class="hero__label hero__label--meta">
+          Nebraska&ndash;Lincoln<br />2026
+        </span>
+
+        <span class="hero__label hero__label--nav" aria-hidden="true">
+          Modernized<br />Design<br />Approach
+        </span>
+
+        <!-- Ghost initials -->
+        <span class="hero__ghost-initials" aria-hidden="true">LP</span>
+
+        <!-- Layer 6 — DESIGN WITH PURPOSE -->
+        <div class="hero__caption" aria-label="Design with Purpose">
+          Design<br />with<br />Purpose
+        </div>
+
+        <!-- Layer 7 — scroll cue -->
+        <div class="hero__scroll" aria-hidden="true">&#8595; scroll</div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="mx-auto max-w-6xl px-4 pt-14">
+        <div class="grid gap-6 md:grid-cols-12">
+          <div class="md:col-span-4" data-scroll data-scroll-direction="left">
+            <h2 class="text-2xl font-extrabold tracking-tight text-wine-plum">
+              About
+            </h2>
+            <p class="mt-2 text-sm text-mauve-shadow/75">
+              Quick context: what I care about and how I work.
+            </p>
+          </div>
+          <div class="md:col-span-8">
+            <div
+              class="rounded-3xl bg-white/70 p-6 ring-1 ring-black/10"
+              data-scroll
+            >
+              <p class="leading-relaxed text-mauve-shadow/85">
+                I’m a design student who likes work that’s equal parts visual
+                and practical. I’m happiest when I can take a messy problem,
+                find the pattern, and build a simple interface that feels
+                intentional. I’m detail-oriented, but I also move fast with
+                prototypes and iterate.
+              </p>
+
+              <!-- Slot: paste a 21st.dev “timeline” component here -->
+              <div class="mt-6 grid gap-3 md:grid-cols-2">
+                <div
+                  class="rounded-2xl bg-soft-peach/60 p-4 ring-1 ring-black/5"
+                >
+                  <p class="text-xs font-semibold text-wine-plum">I enjoy</p>
+                  <p class="mt-1 text-sm text-mauve-shadow/80">
+                    Typography, layout grids, UI patterns, and polished
+                    micro-details.
+                  </p>
+                </div>
+                <div class="rounded-2xl bg-dry-sage/50 p-4 ring-1 ring-black/5">
+                  <p class="text-xs font-semibold text-wine-plum">
+                    I’m learning
+                  </p>
+                  <p class="mt-1 text-sm text-mauve-shadow/80">
+                    More front-end structure: components, states, and
+                    accessibility basics.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="mx-auto max-w-6xl px-4 pt-14">
+        <div class="flex items-end justify-between">
+          <div data-scroll data-scroll-direction="left">
+            <h2 class="text-2xl font-extrabold tracking-tight text-wine-plum">
+              Skills
+            </h2>
+            <p class="mt-2 text-sm text-mauve-shadow/75">
+              A few things I can reliably do.
+            </p>
+          </div>
+        </div>
+
+        <!-- Slot: paste a 21st.dev “feature cards” component -->
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          <div
+            class="rounded-3xl bg-white/70 p-6 ring-1 ring-black/10"
+            data-scroll
+            data-scroll-delay="0.05"
+          >
+            <p class="text-sm font-semibold text-wine-plum">
+              UI layout & hierarchy
+            </p>
+            <p class="mt-2 text-sm text-mauve-shadow/80">
+              Clear type scale, spacing system, and “scan-first” page structure.
+            </p>
+          </div>
+          <div
+            class="rounded-3xl bg-white/70 p-6 ring-1 ring-black/10"
+            data-scroll
+            data-scroll-delay="0.15"
+          >
+            <p class="text-sm font-semibold text-wine-plum">Prototyping</p>
+            <p class="mt-2 text-sm text-mauve-shadow/80">
+              Fast flows, sensible states, and iterations that tighten the
+              experience.
+            </p>
+          </div>
+          <div
+            class="rounded-3xl bg-white/70 p-6 ring-1 ring-black/10"
+            data-scroll
+            data-scroll-delay="0.25"
+          >
+            <p class="text-sm font-semibold text-wine-plum">Front-end basics</p>
+            <p class="mt-2 text-sm text-mauve-shadow/80">
+              Comfortable with HTML/CSS and component-style thinking.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SNAPSHOTS / GALLERY -->
+      <section id="work" class="mx-auto max-w-6xl px-4 pt-14">
+        <h2 class="text-2xl font-extrabold tracking-tight text-wine-plum">
+          Snapshots
+        </h2>
+        <p class="mt-2 text-sm text-mauve-shadow/75">
+          Tiny peeks — not a full portfolio.
+        </p>
+
+        <div
+          class="carousel mt-6"
+          id="snapshot-carousel"
+          aria-label="Snapshot carousel"
+          data-scroll
+        >
+          <div class="carousel__viewport" id="carousel-viewport" tabindex="0">
+            <div class="carousel__track" id="carousel-track"></div>
+          </div>
+
+          <button
+            class="carousel__btn carousel__btn--prev"
+            id="carousel-prev"
+            aria-label="Previous slide"
+            disabled
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+
+          <button
+            class="carousel__btn carousel__btn--next"
+            id="carousel-next"
+            aria-label="Next slide"
+          >
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="mx-auto max-w-6xl px-4 py-16">
+        <div
+          id="lets-connect"
+          class="contact-card rounded-3xl bg-wine-plum p-8 text-soft-peach shadow-sm md:p-10"
+          data-scroll
+        >
+          <h2 class="text-2xl font-extrabold tracking-tight">Let’s connect</h2>
+          <p class="mt-2 max-w-2xl text-sm text-soft-peach/85">
+            If you’re a recruiter/employer or you want to talk design + UI, I’m
+            happy to chat.
+          </p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              class="rounded-2xl bg-soft-peach px-5 py-3 text-sm font-semibold text-wine-plum hover:opacity-95"
+              href="mailto:lucas.pruss.creative@gmail.com"
+            >
+              Email me
+            </a>
+            <a
+              class="inline-flex items-center gap-2 rounded-2xl bg-white/15 px-5 py-3 text-sm font-semibold text-soft-peach ring-1 ring-white/25 hover:bg-white/20"
+              href="https://www.linkedin.com/in/lucas-pruss/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"
+                />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg>
+              LinkedIn
+            </a>
+            <a
+              class="inline-flex items-center gap-2 rounded-2xl bg-white/15 px-5 py-3 text-sm font-semibold text-soft-peach ring-1 ring-white/25 hover:bg-white/20"
+              href="https://www.instagram.com/lucas.pruss/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              Instagram
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- SNAPSHOT LIGHTBOX (opened from carousel slides) -->
+    <div class="lightbox" id="snapshot-lightbox" hidden aria-hidden="true">
+      <div
+        class="lightbox__backdrop"
+        id="snapshot-lightbox-backdrop"
+        aria-hidden="true"
+      ></div>
+      <figure
+        class="lightbox__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Snapshot preview"
+      >
+        <button
+          class="lightbox__close"
+          id="snapshot-lightbox-close"
+          type="button"
+          aria-label="Close preview"
+        >
+          ×
+        </button>
+        <img id="snapshot-lightbox-img" alt="" />
+      </figure>
+    </div>
+
+    <footer
+      class="border-t border-black/5 py-8 text-center text-xs text-mauve-shadow/60"
+    >
+      © <span id="year"></span> Lucas Pruss • Built with HTML + CSS + Tailwind
+    </footer>
+
+    <script>
+      // Header: becomes solid after hero scrolled past
+      (function () {
+        var header = document.getElementById("site-header");
+        var hero = document.getElementById("hero-cover");
+        function onScroll() {
+          var threshold = hero ? hero.offsetHeight * 0.6 : 300;
+          header.classList.toggle("scrolled", window.scrollY > threshold);
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+    </script>
+
+    <script>
+      // ── Scroll animations (mirrors ui-layouts ScrollElement) ──
+      (function () {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const el = entry.target;
+                const delay = parseFloat(el.dataset.scrollDelay || "0") * 1000;
+                setTimeout(() => el.classList.add("is-visible"), delay);
+                observer.unobserve(el);
+              }
+            });
+          },
+          { threshold: 0.3, rootMargin: "0px 0px -200px 0px" },
+        );
+        document
+          .querySelectorAll("[data-scroll]")
+          .forEach((el) => observer.observe(el));
+      })();
+    </script>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+      // ── Snapshots carousel (vanilla JS) ──
+      (function () {
+        const carousel = document.getElementById("snapshot-carousel");
+        const viewport = document.getElementById("carousel-viewport");
+        const track = document.getElementById("carousel-track");
+        const prevBtn = document.getElementById("carousel-prev");
+        const nextBtn = document.getElementById("carousel-next");
+
+        if (!carousel || !viewport || !track || !prevBtn || !nextBtn) return;
+
+        // Lightbox elements
+        const lightbox = document.getElementById("snapshot-lightbox");
+        const lightboxImg = document.getElementById("snapshot-lightbox-img");
+        const lightboxClose = document.getElementById(
+          "snapshot-lightbox-close",
+        );
+        const lightboxBackdrop = document.getElementById(
+          "snapshot-lightbox-backdrop",
+        );
+
+        const canLightbox = Boolean(
+          lightbox && lightboxImg && lightboxClose && lightboxBackdrop,
+        );
+
+        const openLightbox = (src, alt) => {
+          if (!canLightbox) return;
+          lightboxImg.src = src;
+          lightboxImg.alt = alt || "Snapshot";
+          lightbox.hidden = false;
+          lightbox.setAttribute("aria-hidden", "false");
+          document.body.classList.add("is-lightbox-open");
+          lightboxClose.focus();
+        };
+
+        const closeLightbox = () => {
+          if (!canLightbox) return;
+          lightbox.hidden = true;
+          lightbox.setAttribute("aria-hidden", "true");
+          lightboxImg.src = "";
+          document.body.classList.remove("is-lightbox-open");
+        };
+
+        if (canLightbox) {
+          lightboxClose.addEventListener("click", closeLightbox);
+          lightboxBackdrop.addEventListener("click", closeLightbox);
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && !lightbox.hidden) closeLightbox();
+          });
+        }
+
+        const items = [
+          { src: "images/snapshots/BeefCake Website Pages-01.png" },
+          { src: "images/snapshots/JukeBox Mockup 1.png" },
+          { src: "images/snapshots/MOCKUP 2.png" },
+          { src: "images/snapshots/Mockup 3.png" },
+          { src: "images/snapshots/Pruss_L_ Bus_Stop_Poster.jpg" },
+          { src: "images/snapshots/Pruss_L_P1_Poster.jpg" },
+          { src: "images/snapshots/WW Website-01.png" },
+          { src: "images/snapshots/WallyWorldpackage.png" },
+          { src: "images/snapshots/nebraska-hand-mockup.png" },
+          { src: "images/snapshots/nebraska-map-mockup.png" },
+        ];
+
+        const altFromSrc = (src) => {
+          const filename = (src || "").split("/").pop() || "Snapshot";
+          return filename.replace(/\.[^.]+$/, "");
+        };
+
+        // Helps avoid opening the lightbox when the user is drag-scrolling
+        let scrollLeftOnPointerDown = viewport.scrollLeft;
+        viewport.addEventListener(
+          "pointerdown",
+          () => {
+            scrollLeftOnPointerDown = viewport.scrollLeft;
+          },
+          { passive: true },
+        );
+
+        items.forEach((item, index) => {
+          const slide = document.createElement("div");
+          slide.className = "carousel__slide";
+
+          const img = document.createElement("img");
+          img.src = encodeURI(item.src);
+          img.alt = altFromSrc(item.src);
+          img.draggable = false;
+
+          slide.appendChild(img);
+          track.appendChild(slide);
+
+          if (canLightbox) {
+            slide.tabIndex = 0;
+            slide.setAttribute("role", "button");
+            slide.setAttribute("aria-label", `Open snapshot ${index + 1}`);
+
+            const openFromSlide = () => {
+              if (Math.abs(viewport.scrollLeft - scrollLeftOnPointerDown) > 6)
+                return;
+              openLightbox(img.src, img.alt);
+            };
+
+            slide.addEventListener("click", openFromSlide);
+            slide.addEventListener("keydown", (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                openLightbox(img.src, img.alt);
+              }
+            });
+          }
+        });
+
+        const getStep = () => {
+          const first = track.querySelector(".carousel__slide");
+          if (!first) return 0;
+          const trackStyles = window.getComputedStyle(track);
+          const gap =
+            parseFloat(trackStyles.columnGap || trackStyles.gap || "0") || 0;
+          return first.getBoundingClientRect().width + gap;
+        };
+
+        const updateButtons = () => {
+          const atStart = viewport.scrollLeft <= 1;
+          prevBtn.disabled = atStart;
+          prevBtn.setAttribute("aria-disabled", String(atStart));
+          nextBtn.disabled = false;
+          nextBtn.setAttribute("aria-disabled", "false");
+        };
+
+        prevBtn.addEventListener("click", () => {
+          viewport.scrollBy({ left: -getStep(), behavior: "smooth" });
+        });
+        nextBtn.addEventListener("click", () => {
+          const maxScroll = viewport.scrollWidth - viewport.clientWidth;
+          if (viewport.scrollLeft >= maxScroll - 1) {
+            viewport.scrollTo({ left: 0, behavior: "smooth" });
+          } else {
+            viewport.scrollBy({ left: getStep(), behavior: "smooth" });
+          }
+        });
+
+        viewport.addEventListener(
+          "scroll",
+          () => window.requestAnimationFrame(updateButtons),
+          { passive: true },
+        );
+        window.addEventListener("resize", updateButtons);
+
+        updateButtons();
+      })();
+    </script>
+  </body>
+</html>
